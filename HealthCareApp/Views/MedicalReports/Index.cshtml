@@ -1,0 +1,36 @@
+﻿@model IEnumerable<HealthcareApp.Models.DataModels.MedicalReport>
+
+@{
+    ViewData["Title"] = "Medical Reports";
+}
+
+<h1>@ViewData["Title"] List</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateCreated)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td class="desc-col">
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCreated)
+            </td>
+            <td>
+                <a asp-controller="PatientAdmissions" asp-action="Details" asp-route-id="@item.PatientAdmissionId" ><i class="fas fa-info-circle fa-lg"></i></a> 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

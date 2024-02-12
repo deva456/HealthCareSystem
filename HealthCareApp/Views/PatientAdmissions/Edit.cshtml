@@ -1,0 +1,49 @@
+﻿@model HealthcareApp.Models.DataModels.PatientAdmission
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit patient admission</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="AdmissionDateTime" class="control-label"></label>
+                <input asp-for="AdmissionDateTime" class="form-control" />
+                <span asp-validation-for="AdmissionDateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="PatientId" class="control-label"></label>
+                <select asp-for="PatientId" class="form-control" asp-items="ViewBag.PatientId"></select>
+                <span asp-validation-for="PatientId" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="DoctorId" class="control-label"></label>
+                <select asp-for="DoctorId" class="form-control" asp-items="ViewBag.SpecialistId"></select>
+                <span asp-validation-for="DoctorId" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check mt-2">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsUrgent" /> @Html.DisplayNameFor(model => model.IsUrgent)
+                </label>
+            </div>
+            <div class="form-group mt-3">
+                @if (ViewBag.AdmissionState is not null) {
+                    <span class="text-danger">@ViewBag.AdmissionState</span>
+                    <br/>
+                }
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-danger btn-spacing">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,60 @@
+﻿@using HealthcareApp.Models.ViewModels
+@model HealthcareApp.Models.DataModels.Patient
+
+@{
+    ViewData["Title"] = "Details";
+    ViewData["PatientPage"] = "active";
+}
+
+
+<h2>Patient's details</h2>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Firstname)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Firstname)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Lastname)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Lastname)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DateOfBirth)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TelephoneNumber)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TelephoneNumber)
+        </dd>
+    </dl>
+</div>
+<div class="det-header">
+     <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn-spacing mt-2 btn-primary btn">Edit</a>
+     <a asp-action="Index" class="btn-spacing mt-2 btn-danger btn">Back</a>
+</div>
+<br/>
+<br/>
+@await Html.PartialAsync("PatientAdmissionListPartial", (PatientAdmissionViewModel) ViewBag.PatientAdmissionsViewModel)
+

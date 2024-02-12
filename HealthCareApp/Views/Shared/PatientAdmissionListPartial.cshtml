@@ -1,0 +1,95 @@
+﻿@using HealthcareApp.Models.DataModels
+@model HealthcareApp.Models.ViewModels.PatientAdmissionViewModel
+
+<div class="container">
+    <div class="row justify-content-between">
+        <div class="col-6">
+            <h2>Patient Admission List</h2>
+        </div>
+        <div class="col-6">
+            <div class="float-end">
+                <div class="btn-group">
+                    <a href="@Url.Action("GeneratePdf", "PatientAdmissions", new { startDate = Model.StartDate, endDate = Model.EndDate, patientId = ViewData["PatientDetailId"] })"
+                       target="_blank" class="dwn-btn btn btn-primary btn-sm">Download <i class="fas fa-download fa-lg"></i></a>
+                    <a asp-action="Create" asp-controller="PatientAdmissions" asp-route-id="@ViewData["PatientDetailId"]" class="btn btn-success btn-sm">Create New</a>    
+                </div>
+             </div>
+        </div>
+    </div>
+</div>
+<hr/>
+@if (ViewData["ShowFilter"] is not null) {
+<div class="container">
+    <div class="row">
+          <form asp-action="Index" >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" type="date" class="form-control dfilter">
+            </div>
+            <div class="form-group mt-1">
+                <label asp-for="EndDate" class="control-label"></label>
+                <input asp-for="EndDate" type="date" class="form-control dfilter">
+            </div>
+            <div class="form-group mt-1">
+                @if (ViewData["ErrorMessage"] != null)
+                {
+                    <span class="text-danger">@ViewData["ErrorMessage"]</span>
+                }
+                <br/>
+                <input type="submit" value="Filter" class="btn btn-primary" />
+            </div>
+         </form>
+    </div>
+</div>
+<br/>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameForInnerType((PatientAdmission admission) => admission.Patient)
+            </th>
+            <th>
+                @Html.DisplayNameForInnerType((PatientAdmission admission) => admission.AdmissionDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameForInnerType((PatientAdmission admission) => admission.Doctor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.PatientAdmissions) {
+        <tr class="@(item.IsCancelled ? "cancelled-row" : item.AdmissionDateTime < DateTime.Now ? "completed-row": item.IsUrgent ? "urgent-row" : "active-row" ) adm-row no-select" id="@item.Id">
+            <td>
+                @Html.DisplayFor(modelItem => item.Patient.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdmissionDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Doctor.FullNameAndCode)
+            </td>
+            <td>
+                <a asp-controller="PatientAdmissions" asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-info-circle fa-lg"></i></a>
+                @if (!item.IsCancelled && item.AdmissionDateTime > DateTime.Now)
+                {
+                    <a asp-controller="PatientAdmissions" asp-action="Edit" asp-route-id="@item.Id"  class="btn-spacing"><i class="fas fa-edit fa-lg"></i></a>
+                    <a href="@Url.Action("CancelAdmission", "PatientAdmissions", new { id = item.Id, redirectToPatient = (ViewData["PatientPage"] is not null) })" class="btn-spacing"><i class="fas fa-ban fa-lg"></i></a>
+                }   
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div class="row">
+    <div class="col-auto"><p>Table legend: </p></div>
+    <div class="col-auto"><span class="badge badge-light text-dark bordered-span">Active</span></div>
+    <div class="col-auto"><span class="badge urgent-row">Urgent</span></div>          
+    <div class="col-auto"><span class="badge completed-row text-dark">Completed</span></div>
+    <div class="col-auto"><span class="badge cancelled-row text-dark">Cancelled</span></div>
+    <div class="col-auto"><span class="badge selected text-dark">Selected Row</span></div>
+</div>
+<br/>
+<div id="medRecPartialView" class="mt-6"></div>

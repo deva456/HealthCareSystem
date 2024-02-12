@@ -1,0 +1,40 @@
+﻿@model HealthcareApp.Models.ViewModels.MedicalReportPartialViewModel
+
+<div>
+    <h4>Medical Report</h4>
+    <hr/>
+    @if (Model.MedicalReport is not null)
+    {
+        <dl class="row">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.MedicalReport.Description)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.MedicalReport.Description)
+            </dd>
+                <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.MedicalReport.DateCreated)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.MedicalReport.DateCreated)
+            </dd>
+
+        </dl>
+        @if (ViewBag.Cancelled is null && Model.IsCancelled is null)
+        {
+            <a asp-controller="MedicalReports" asp-action="Edit" asp-route-id="@Model?.MedicalReport.Id" class="btn btn-primary">Edit report</a>
+        }
+    }
+    else
+    {
+        @if (ViewBag.Cancelled is null && Model.IsCancelled is null)
+        {
+            <p>No medical report for associated admission, <a asp-controller="MedicalReports" asp-action="Create" asp-route-id="@Model.AdmissionId">click here</a> to create it.</p>
+        }
+        else
+        {
+            <p>No medical report for associated admission. It is not possible to create new report for cancelled admission.</p>
+        }
+    }
+</div>
+

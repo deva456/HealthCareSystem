@@ -1,0 +1,15 @@
+﻿@using HealthcareApp.Models.DataModels
+@model HealthcareApp.Models.ViewModels.PatientAdmissionViewModel
+@{
+    ViewData["Title"] = "Patient Admission";
+    ViewData["ShowFilter"] = true;
+}
+
+@await Html.PartialAsync("PatientAdmissionListPartial", Model)
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

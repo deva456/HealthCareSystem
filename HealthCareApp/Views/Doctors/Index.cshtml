@@ -1,0 +1,61 @@
+﻿@model IEnumerable<HealthcareApp.Models.DataModels.Doctor>
+
+@{
+    ViewData["Title"] = "Doctors";
+}
+
+<div class="container">
+    <div class="row justify-content-between">
+        <div class="col-6">
+            <h1>@ViewData["Title"] List</h1>
+        </div>
+        <div class="col-6">
+            <div class="float-end">
+                <a asp-action="Create" class="btn btn-success btn-sm cnew">Create New</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Firstname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lastname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Code)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Code)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-info-circle fa-lg"></i></a> 
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn-spacing"><i class="fas fa-edit fa-lg"></i></a> 
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn-spacing"><i class="fas fa-trash fa-lg"></i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

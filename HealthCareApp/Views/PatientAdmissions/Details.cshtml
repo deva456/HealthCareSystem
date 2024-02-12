@@ -1,0 +1,11 @@
+﻿@using HealthcareApp.Models.ViewModels
+@model HealthcareApp.Models.DataModels.PatientAdmission
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+@await Html.PartialAsync("PatientAdmissionPartial", Model)
+<br/>
+<br/>
+@await Html.PartialAsync("MedicalRecordPartial", (MedicalReportPartialViewModel) ViewBag.MedicalReport)

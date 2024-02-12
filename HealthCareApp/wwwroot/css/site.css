@@ -1,0 +1,47 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.btn-spacing {
+    margin-left: 15px;
+}
+
+.fa-trash, .fa-ban {
+    color: red;
+}
+
+.fa-trash:hover, .fa-ban:hover {
+    color: brown;
+}
+
+.cnew {
+    margin-top: 17%;
+}
+
+.det-header {
+    display: flex;
+    vertical-align: central;
+}
+
+textarea {
+    height: 250pt;
+}
+
+.desc-col {
+    max-width: 200pt;
+}

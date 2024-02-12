@@ -1,0 +1,48 @@
+﻿.urgent-row {
+    background-color: lightcoral;
+}
+
+.completed-row {
+    background-color: lightgray;
+}
+
+.cancelled-row {
+    background-color: rgb(252, 164, 251);
+}
+
+.urgent-row:hover {
+    background-color: rgb(222, 124, 124);
+}
+
+.completed-row:hover, .active-row:hover, .cancelled-row:hover {
+    background-color: rgb(173, 172, 172);
+}
+
+.selected {
+    background-color: lightgreen !important;
+}
+
+.bordered-span {
+    display: inline-block; 
+    border: 1px solid; 
+}
+
+.no-select {
+    user-select: none;
+    -moz-user-select: none; 
+    -webkit-user-select: none;
+}
+
+.btn-group {
+    display: flex;
+    margin-top: 5%;
+}
+
+
+.dwn-btn {
+    margin-right: 10px;
+}
+
+.dfilter {
+    width: 20%;
+}

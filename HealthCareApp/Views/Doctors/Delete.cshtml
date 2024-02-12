@@ -1,0 +1,42 @@
+﻿@model HealthcareApp.Models.DataModels.Doctor
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="mt-4">
+    <h4>Are you sure you want to delete doctor?</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2 p-1">
+            @Html.DisplayNameFor(model => model.Firstname)
+        </dt>
+        <dd class = "col-sm-10 p-1">
+            @Html.DisplayFor(model => model.Firstname)
+        </dd>
+        <dt class = "col-sm-2 p-1">
+            @Html.DisplayNameFor(model => model.Lastname)
+        </dt>
+        <dd class = "col-sm-10 p-1">
+            @Html.DisplayFor(model => model.Lastname)
+        </dd>
+        <dt class = "col-sm-2 p-1">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10 p-1">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2 p-1">
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+        <dd class = "col-sm-10 p-1">
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-primary btn-spacing">Cancel</a>
+    </form>
+</div>

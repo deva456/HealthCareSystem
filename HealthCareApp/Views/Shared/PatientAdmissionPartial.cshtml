@@ -1,0 +1,39 @@
+﻿@model HealthcareApp.Models.DataModels.PatientAdmission
+
+<div>
+    <h4>Patient Admission @(Model.IsCancelled ? "(Cancelled)" : "")</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AdmissionDateTime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AdmissionDateTime)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IsUrgent)
+        </dt>
+        <dd class = "col-sm-10">
+            @(Model.IsUrgent ? "Yes" : "No")
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Patient)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Patient.Firstname)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Doctor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Doctor.FullNameAndCode)
+        </dd>
+    </dl>
+</div>
+<div class="det-header">
+    @if (!Model.IsCancelled && Model.AdmissionDateTime > DateTime.Now) {
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn-spacing mt-2 btn-primary btn">Edit</a>
+        <p>&nbsp; &nbsp;</p>
+    }
+    <a asp-action="Index" class="mt-2 btn-danger btn">To admission list</a>
+</div>
